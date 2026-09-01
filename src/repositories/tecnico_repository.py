@@ -3,7 +3,7 @@ from src.schemas.tecnico_schema import Tecnico, TecnicoCadastro, TecnicoEditar
 
 
 def cadastrar(tecnico: TecnicoCadastro) -> Tecnico:
-    """Responsável por listar todos os Técnicos."""
+    """Responsável por cadastrar os Técnicos."""
     sql = """
     INSERT INTO tecnicos (
         nome,
@@ -18,7 +18,7 @@ def cadastrar(tecnico: TecnicoCadastro) -> Tecnico:
             sql,
             (
                 tecnico.nome,
-                tecnico. nacionalidade,
+                tecnico.nacionalidade,
                 tecnico.data_nascimento
             ),
         )
@@ -87,7 +87,7 @@ def editar(id: int, tecnico: TecnicoEditar):
 
 
 def consultar_por_id(id: int) -> Tecnico | None:
-    """Responsável por consultar os Técnicos incluindo sua categoria por id"""
+    """Responsável por consultar os Técnicos pelo seu id"""
     sql = """
     SELECT
         id,
@@ -116,7 +116,7 @@ def consultar_por_id(id: int) -> Tecnico | None:
 
 def apagar(id: int):
     """Responsável por apagar o cadastro do Técnico."""
-    sql = "DELETE FROM tecnicos WHERE id = %s"
+    sql = "DELETE FROM tecnicos WHERE id = %s;"
     with conectar() as conexao, conexao.cursor() as cursor:
         cursor.execute(sql, (id,))
         conexao.commit()

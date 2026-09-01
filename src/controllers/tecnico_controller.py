@@ -3,7 +3,10 @@ from fastapi import APIRouter, HTTPException, status
 from src.repositories import tecnico_repository
 from src.schemas.tecnico_schema import TecnicoCadastro, TecnicoEditar
 
-router: APIRouter = APIRouter(prefix="/tecnicos")
+router: APIRouter = APIRouter(
+    prefix="/tecnicos",
+    tags=["Técnicos"],
+)
 
 
 @router.post("")
@@ -19,7 +22,7 @@ def editar(id: int, tecnico: TecnicoEditar):
     tecnico_banco = tecnico_repository.consultar_por_id(id)
 
     if tecnico_banco is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tecnico não encontrado")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tecnico não encontrado.")
 
     tecnico_repository.editar(id, tecnico)
     return {
@@ -31,7 +34,7 @@ def consultar_por_id(id: int):
     tecnico = tecnico_repository.consultar_por_id(id)
 
     if tecnico is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tecnico não encontrado")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tecnico não encontrado.")
 
     return tecnico
 
@@ -40,7 +43,7 @@ def apagar(id: int):
     tecnico = tecnico_repository.consultar_por_id(id)
 
     if tecnico is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tecnico Não encontrado")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tecnico não encontrado.")
 
     tecnico_repository.apagar(id)
     return {
