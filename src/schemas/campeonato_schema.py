@@ -1,20 +1,17 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class Campeonato:
+class Campeonato(BaseModel):
     id: int
     nome: str
-    temporada: str
+    temporada: int
 
 
-@dataclass
-class CampeonatoCriar:
+class CampeonatoCriar(BaseModel):
     nome: str
-    temporada: str
+    temporada: int
 
 
-@dataclass
-class CampeonatoAtualizar:
+class CampeonatoAtualizar(BaseModel):
     nome: str
-    temporada: str
+    temporada: int
