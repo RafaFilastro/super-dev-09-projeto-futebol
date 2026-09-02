@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071b12">
+    <title>Arquivo da Bola | Futebol Brasileiro</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="stadium-lights" aria-hidden="true"></div>
+    <div class="pitch-grid" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <a class="brand" href="#inicio" data-page-link="inicio">
+            <span class="brand-ball" aria-hidden="true">⚽</span>
+            <span>
+                <strong>Arquivo da Bola</strong>
+                <small>Futebol Brasileiro</small>
+            </span>
+        </a>
+
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
+
+        <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+            <a href="#inicio" data-page-link="inicio" class="active">Início</a>
+            <a href="#clubes" data-page-link="clubes">Clubes</a>
+            <a href="#jogadores" data-page-link="jogadores">Jogadores</a>
+            <a href="#tecnicos" data-page-link="tecnicos">Técnicos</a>
+            <a href="#estadios" data-page-link="estadios">Estádios</a>
+            <a href="#competicoes" data-page-link="competicoes">Competições</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page active" id="page-inicio" data-page="inicio">
+            <div class="hero shell">
+                <div class="hero-copy reveal">
+                    <span class="eyebrow">História • Elencos • Estruturas</span>
+                    <h1>O futebol entra em campo <em>nos dados.</em></h1>
+                    <p>
+                        Explore clubes, jogadores, técnicos e estádios em uma experiência
+                        conectada diretamente à API do projeto.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" data-go="clubes">Explorar clubes</button>
+                        <button class="btn btn-ghost" data-go="jogadores">Ver jogadores</button>
+                    </div>
+                </div>
+
+                <div class="hero-stage reveal delay-1" aria-hidden="true">
+                    <div class="scoreboard">
+                        <span class="scoreboard-label">BANCO DE DADOS</span>
+                        <strong>API</strong>
+                        <span class="scoreboard-divider">×</span>
+                        <strong>FRONT</strong>
+                        <small>INTEGRAÇÃO AO VIVO</small>
+                    </div>
+                    <div class="football-orbit">
+                        <span class="football">⚽</span>
+                    </div>
+                    <div class="field-lines"></div>
+                </div>
+            </div>
+
+            <div class="shell stats-grid" id="stats-grid">
+                <article class="stat-card reveal">
+                    <span>Clubes</span>
+                    <strong id="stat-clubes">--</strong>
+                    <small>cadastrados</small>
+                </article>
+                <article class="stat-card reveal delay-1">
+                    <span>Jogadores</span>
+                    <strong id="stat-jogadores">--</strong>
+                    <small>no elenco</small>
+                </article>
+                <article class="stat-card reveal delay-2">
+                    <span>Técnicos</span>
+                    <strong id="stat-tecnicos">--</strong>
+                    <small>registrados</small>
+                </article>
+                <article class="stat-card reveal delay-3">
+                    <span>Estádios</span>
+                    <strong id="stat-estadios">--</strong>
+                    <small>catalogados</small>
+                </article>
+            </div>
+
+            <section class="shell section-block">
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">Destaques</span>
+                        <h2>Clubes em campo</h2>
+                    </div>
+                    <button class="text-button" data-go="clubes">Ver todos →</button>
+                </div>
+                <div class="club-showcase" id="home-clubes"></div>
+            </section>
+        </section>
+
+        <section class="page shell" id="page-clubes" data-page="clubes">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">Identidade dos times</span>
+                    <h1>Clubes</h1>
+                    <p>Conheça a estrutura de cada clube e seus vínculos.</p>
+                </div>
+                <button class="btn btn-primary" data-action="novo-clube">+ Novo clube</button>
+            </div>
+            <div class="toolbar">
+                <label class="search-box">
+                    <span>⌕</span>
+                    <input type="search" id="busca-clubes" placeholder="Buscar clube, cidade ou estado">
+                </label>
+            </div>
+            <div class="cards-grid" id="lista-clubes"></div>
+        </section>
+
+        <section class="page shell" id="page-jogadores" data-page="jogadores">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">Quem faz a bola rolar</span>
+                    <h1>Jogadores</h1>
+                    <p>Elencos conectados aos clubes cadastrados no banco.</p>
+                </div>
+                <button class="btn btn-primary" data-action="novo-jogador">+ Novo jogador</button>
+            </div>
+            <div class="toolbar">
+                <label class="search-box">
+                    <span>⌕</span>
+                    <input type="search" id="busca-jogadores" placeholder="Buscar jogador, posição ou clube">
+                </label>
+            </div>
+            <div class="players-grid" id="lista-jogadores"></div>
+        </section>
+
+        <section class="page shell" id="page-tecnicos" data-page="tecnicos">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">Comando técnico</span>
+                    <h1>Técnicos</h1>
+                    <p>Profissionais responsáveis por conduzir os clubes.</p>
+                </div>
+                <button class="btn btn-primary" data-action="novo-tecnico">+ Novo técnico</button>
+            </div>
+            <div class="data-panel">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Nacionalidade</th>
+                                <th>Nascimento</th>
+                                <th class="actions-col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-tecnicos"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="page shell" id="page-estadios" data-page="estadios">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">Onde a história acontece</span>
+                    <h1>Estádios</h1>
+                    <p>Palcos do futebol, suas cidades e capacidades.</p>
+                </div>
+                <button class="btn btn-primary" data-action="novo-estadio">+ Novo estádio</button>
+            </div>
+            <div class="stadiums-grid" id="lista-estadios"></div>
+        </section>
+
+        <section class="page shell" id="page-competicoes" data-page="competicoes">
+            <div class="page-header">
+                <div>
+                    <span class="eyebrow">Próxima etapa da integração</span>
+                    <h1>Competições</h1>
+                    <p>Campeonatos, partidas e gols serão conectados à parte desenvolvida pela dupla.</p>
+                </div>
+            </div>
+
+            <div class="integration-panel" id="integration-panel">
+                <div class="integration-icon">⚽</div>
+                <div>
+                    <span class="status-pill">Integração preparada</span>
+                    <h2>Esperando os endpoints do parceiro</h2>
+                    <p>
+                        A interface já possui espaço para campeonatos e partidas. Assim que as rotas
+                        <code>/campeonatos</code>, <code>/partidas</code> e <code>/gols</code> entrarem na API,
+                        conectamos esta área sem refazer o restante do site.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-backdrop" id="modal-backdrop" hidden>
+        <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button class="modal-close" id="modal-close" aria-label="Fechar">×</button>
+            <div id="modal-content"></div>
+        </section>
+    </div>
+
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <footer class="footer">
+        <div class="shell">
+            <span>⚽ Arquivo da Bola</span>
+            <small>Projeto acadêmico • FastAPI + MySQL + HTML/CSS/JS</small>
+        </div>
+    </footer>
+
+    <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

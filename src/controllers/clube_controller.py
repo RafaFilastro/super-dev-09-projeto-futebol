@@ -7,7 +7,6 @@ from src.repositories import (
 )
 from src.schemas.clube_schema import ClubeCadastro, ClubeEditar
 
-
 router: APIRouter = APIRouter(
     prefix="/clubes",
     tags=["Clubes"],
