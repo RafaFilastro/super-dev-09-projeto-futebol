@@ -5,11 +5,15 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from src.controllers import (
+    campeonato_controller,
     clube_controller,
     estadio_controller,
+    gol_controller,
     jogador_controller,
+    partida_controller,
     tecnico_controller,
 )
+
 
 app: FastAPI = FastAPI()
 
@@ -17,6 +21,10 @@ app.include_router(tecnico_controller.router)
 app.include_router(estadio_controller.router)
 app.include_router(jogador_controller.router)
 app.include_router(clube_controller.router)
+app.include_router(campeonato_controller.router)
+app.include_router(partida_controller.router)
+app.include_router(gol_controller.router)
+
 
 RAIZ_PROJETO = Path(__file__).resolve().parent
 PASTA_FRONTEND = RAIZ_PROJETO / "frontend"

@@ -125,7 +125,6 @@ CREATE TABLE gols (
 ) ENGINE=InnoDB;
 
 
-----------------------------------------------------------------------------------------------------
 -- Cadastra o Campeonato Brasileiro Série A de 2026.
 INSERT INTO campeonatos (
     nome,
@@ -1107,7 +1106,6 @@ VALUES
     )
 );
 
-----------------------------------------------------------------------------------------------------
 -- CONSULTAS PARA TESTES
 
 
