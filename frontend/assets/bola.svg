@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="base" cx="34%" cy="25%" r="78%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.56" stop-color="#f3f4f3"/>
+      <stop offset="0.82" stop-color="#d6dad7"/>
+      <stop offset="1" stop-color="#9da49f"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.42"/>
+    </filter>
+    <clipPath id="clip"><circle cx="64" cy="64" r="55"/></clipPath>
+  </defs>
+  <g filter="url(#shadow)">
+    <circle cx="64" cy="64" r="56" fill="url(#base)" stroke="#eef2ef" stroke-width="3"/>
+    <g clip-path="url(#clip)" stroke="#222824" stroke-width="3.2" stroke-linejoin="round">
+      <polygon points="64,36 79,47 73,65 55,65 49,47" fill="#181d1a"/>
+      <polygon points="28,31 42,25 50,39 39,51 24,46" fill="#202622"/>
+      <polygon points="100,31 86,25 78,39 89,51 104,46" fill="#202622"/>
+      <polygon points="22,78 36,70 49,81 44,98 27,99" fill="#202622"/>
+      <polygon points="106,78 92,70 79,81 84,98 101,99" fill="#202622"/>
+      <polygon points="64,108 49,100 52,84 76,84 79,100" fill="#202622"/>
+      <path d="M49 47 40 51 36 70 55 65Z" fill="none"/>
+      <path d="M79 47 89 51 92 70 73 65Z" fill="none"/>
+      <path d="M55 65 49 81 52 84 76 84 79 81 73 65Z" fill="none"/>
+      <path d="M42 25 55 14 64 36 50 39Z" fill="none"/>
+      <path d="M86 25 73 14 64 36 78 39Z" fill="none"/>
+      <path d="M24 46 13 57 22 78 36 70 39 51Z" fill="none"/>
+      <path d="M104 46 115 57 106 78 92 70 89 51Z" fill="none"/>
+      <path d="M27 99 36 114 52 110 52 84 44 98Z" fill="none"/>
+      <path d="M101 99 92 114 76 110 76 84 84 98Z" fill="none"/>
+    </g>
+    <ellipse cx="44" cy="30" rx="18" ry="10" fill="#fff" opacity="0.28" transform="rotate(-28 44 30)"/>
+  </g>
+</svg>
