@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#071b12">
     <title>Arquivo da Bola | Futebol Brasileiro</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=10.0.0">
 </head>
 <body>
     <div class="stadium-lights" aria-hidden="true"></div>
@@ -32,6 +32,7 @@
         </nav>
     </header>
 
+
     <main>
         <section class="page active" id="page-inicio" data-page="inicio">
             <div class="hero shell">
@@ -48,19 +49,44 @@
                     </div>
                 </div>
 
-                <div class="hero-stage reveal delay-1" aria-hidden="true">
-                    <div class="scoreboard">
-                        <span class="scoreboard-label">BANCO DE DADOS</span>
-                        <strong>API</strong>
-                        <span class="scoreboard-divider">×</span>
-                        <strong>FRONT</strong>
-                        <small>INTEGRAÇÃO AO VIVO</small>
+                <aside class="home-league-card reveal delay-1">
+                    <div class="home-league-head">
+                        <div>
+                            <span class="eyebrow">Classificação</span>
+                            <h2>Tabela do campeonato</h2>
+                        </div>
+                        <label class="home-league-selector">
+                            <span>Campeonato</span>
+                            <select id="home-campeonato-select" aria-label="Selecionar campeonato"></select>
+                        </label>
                     </div>
-                    <div class="football-orbit">
-                        <span class="football">⚽</span>
+
+                    <div class="home-league-meta" id="home-league-meta">
+                        Estatísticas calculadas a partir das partidas realizadas.
                     </div>
-                    <div class="field-lines"></div>
-                </div>
+
+                    <div class="home-league-table-wrap">
+                        <table class="home-league-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Clube</th>
+                                    <th>PTS</th>
+                                    <th>PJ</th>
+                                    <th>V</th>
+                                    <th>E</th>
+                                    <th>D</th>
+                                    <th>SG</th>
+                                </tr>
+                            </thead>
+                            <tbody id="home-league-body">
+                                <tr>
+                                    <td colspan="8">Carregando classificação...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </aside>
             </div>
 
             <div class="shell stats-grid" id="stats-grid">
@@ -86,16 +112,6 @@
                 </article>
             </div>
 
-            <section class="shell section-block">
-                <div class="section-heading">
-                    <div>
-                        <span class="eyebrow">Destaques</span>
-                        <h2>Clubes em campo</h2>
-                    </div>
-                    <button class="text-button" data-go="clubes">Ver todos →</button>
-                </div>
-                <div class="club-showcase" id="home-clubes"></div>
-            </section>
         </section>
 
         <section class="page shell" id="page-clubes" data-page="clubes">
@@ -173,25 +189,106 @@
         </section>
 
         <section class="page shell" id="page-competicoes" data-page="competicoes">
-            <div class="page-header">
-                <div>
-                    <span class="eyebrow">Próxima etapa da integração</span>
+            <div class="competition-hero">
+                <div class="competition-hero-copy">
+                    <span class="eyebrow">Central do campeonato</span>
                     <h1>Competições</h1>
-                    <p>Campeonatos, partidas e gols serão conectados à parte desenvolvida pela dupla.</p>
+                    <p>
+                        Campeonatos, confrontos e gols em uma única central,
+                        alimentada diretamente pelos endpoints da API.
+                    </p>
                 </div>
             </div>
 
-            <div class="integration-panel" id="integration-panel">
-                <div class="integration-icon">⚽</div>
-                <div>
-                    <span class="status-pill">Integração preparada</span>
-                    <h2>Esperando os endpoints do parceiro</h2>
-                    <p>
-                        A interface já possui espaço para campeonatos e partidas. Assim que as rotas
-                        <code>/campeonatos</code>, <code>/partidas</code> e <code>/gols</code> entrarem na API,
-                        conectamos esta área sem refazer o restante do site.
-                    </p>
+            <div class="competition-summary">
+                <article class="competition-stat">
+                    <div class="competition-stat-icon">🏆</div>
+                    <div>
+                        <span>Campeonatos</span>
+                        <strong id="stat-campeonatos">--</strong>
+                        <small>temporadas cadastradas</small>
+                    </div>
+                </article>
+                <article class="competition-stat">
+                    <div class="competition-stat-icon">⚔</div>
+                    <div>
+                        <span>Partidas</span>
+                        <strong id="stat-partidas">--</strong>
+                        <small>confrontos registrados</small>
+                    </div>
+                </article>
+                <article class="competition-stat">
+                    <div class="competition-stat-icon">⚽</div>
+                    <div>
+                        <span>Gols</span>
+                        <strong id="stat-gols">--</strong>
+                        <small>eventos registrados</small>
+                    </div>
+                </article>
+            </div>
+
+            <div class="competition-workspace">
+                <div class="competition-tabs" role="tablist" aria-label="Seções de competições">
+                    <button class="competition-tab active" type="button" data-competition-tab="campeonatos">
+                        <span>🏆</span> Campeonatos
+                    </button>
+                    <button class="competition-tab" type="button" data-competition-tab="partidas">
+                        <span>⚽</span> Partidas
+                    </button>
+                    <button class="competition-tab" type="button" data-competition-tab="gols">
+                        <span>🥅</span> Gols
+                    </button>
                 </div>
+
+                <section class="competition-panel active" data-competition-panel="campeonatos">
+                    <div class="competition-panel-header">
+                        <div>
+                            <span class="eyebrow">Temporadas</span>
+                            <h2>Campeonatos</h2>
+                            <p>Organize as competições disponíveis no banco de dados.</p>
+                        </div>
+                        <button class="btn btn-primary" data-action="novo-campeonato">+ Novo campeonato</button>
+                    </div>
+                    <div class="championship-grid" id="lista-campeonatos"></div>
+                </section>
+
+                <section class="competition-panel" data-competition-panel="partidas">
+                    <div class="competition-panel-header">
+                        <div>
+                            <span class="eyebrow">Calendário e placares</span>
+                            <h2>Partidas</h2>
+                            <p>Cadastre o confronto e coloque a bola para rolar em uma simulação ao vivo.</p>
+                        </div>
+                        <button class="btn btn-primary" data-action="nova-partida">+ Nova partida</button>
+                    </div>
+                    <div class="matches-grid" id="lista-partidas"></div>
+                </section>
+
+                <section class="competition-panel" data-competition-panel="gols">
+                    <div class="competition-panel-header">
+                        <div>
+                            <span class="eyebrow">Bola na rede</span>
+                            <h2>Gols</h2>
+                            <p>Eventos de gol vinculados a jogadores e partidas.</p>
+                        </div>
+                        <button class="btn btn-primary" data-action="novo-gol">+ Novo gol</button>
+                    </div>
+                    <div class="data-panel goals-panel">
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Minuto</th>
+                                        <th>Jogador</th>
+                                        <th>Partida</th>
+                                        <th class="actions-col">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lista-gols"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
     </main>
@@ -212,6 +309,6 @@
         </div>
     </footer>
 
-    <script type="module" src="/static/js/app.js"></script>
+    <script type="module" src="/static/js/app.js?v=10.0.0"></script>
 </body>
 </html>

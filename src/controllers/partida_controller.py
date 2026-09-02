@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
 
 from src.repositories import campeonato_repository, clube_repository, partida_repository
+from src.schemas.partida_schema import PartidaAtualizar, PartidaCriar
 
-from src.schemas.partida_schema import Partida, PartidaCriar, PartidaAtualizar
 
 router: APIRouter = APIRouter(
     prefix="/partidas",
@@ -15,6 +15,12 @@ def listar_partidas():
     return partida_repository.listar()
 
 
+@router.post("/sincronizar-gols")
+def sincronizar_gols_partidas():
+    """Faz o placar e a tabela de gols representarem os mesmos eventos."""
+    return partida_repository.sincronizar_gols()
+
+
 @router.get("/{id}")
 def buscar_partida_por_id(id: int):
     partida = partida_repository.buscar_por_id(id)
@@ -22,7 +28,7 @@ def buscar_partida_por_id(id: int):
     if partida is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Partida não encontrada"
+            detail="Partida não encontrada",
         )
 
     return partida
@@ -61,6 +67,26 @@ def cadastrar_partida(partida: PartidaCriar):
         )
 
     return partida_repository.cadastrar(partida)
+
+
+@router.post("/{id}/simular")
+def simular_partida(id: int):
+    """Simula os 90 minutos e grava o placar e os gols no banco."""
+    try:
+        simulacao = partida_repository.simular(id)
+    except ValueError as erro:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(erro),
+        ) from erro
+
+    if simulacao is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Partida não encontrada",
+        )
+
+    return simulacao
 
 
 @router.put("/{id}")
